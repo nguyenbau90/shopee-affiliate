@@ -19,48 +19,35 @@
         h2 { color: #ee4d2d; margin-top: 0; margin-bottom: 8px; font-size: 22px; font-weight: bold; }
         .desc { color: #666; font-size: 14px; margin-bottom: 25px; line-height: 1.4; }
         
-        /* Khu vực nhập liệu (Input group) */
+        /* Khu vực nhập liệu */
         .input-group { position: relative; margin-bottom: 20px; border: 2px solid #eee; border-radius: 12px; transition: 0.3s; background: white; }
         .input-group:focus-within { border-color: #ee4d2d; box-shadow: 0 0 8px rgba(238, 77, 45, 0.2); }
         input[type="text"] { width: 100%; padding: 14px 85px 14px 14px; border: none; border-radius: 10px; font-size: 15px; color: #333; background: transparent; }
-        input[type="text"]::placeholder { color: #aaa; }
         
-        /* Nút dán nằm gọn bên trong ô input */
         .btn-paste { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 7px 12px; background: #f1f3f5; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; color: #555; font-size: 13px; font-weight: bold; transition: 0.2s; }
-        .btn-paste:active { background: #e2e6ea; transform: translateY(-50%) scale(0.95); }
 
-        /* Nút kích hoạt chính (Màu Shopee) */
         #btn-convert { width: 100%; padding: 16px; background-color: #ee4d2d; color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 17px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 6px rgba(238, 77, 45, 0.2); }
-        #btn-convert:active { transform: translateY(1px); background-color: #d73211; box-shadow: 0 2px 4px rgba(238, 77, 45, 0.2); }
         
-        /* --- PHẦN KẾT QUẢ TỐI ƯU MOBILE (CHỈ CÓ LINK VÀ COPY) --- */
+        /* PHẦN KẾT QUẢ VÀ HƯỚNG DẪN MỚI */
         #result-section { display: none; margin-top: 30px; padding: 15px; border: 2px dashed #2ecc71; border-radius: 15px; background-color: #eafff2; text-align: left; animation: fadeIn 0.5s; }
-        .success-text { color: #2ecc71; font-weight: bold; margin-bottom: 15px; display: block; font-size: 15px; text-align: center; }
+        .success-text { color: #2ecc71; font-weight: bold; margin-bottom: 10px; display: block; font-size: 15px; text-align: center; }
         
-        /* Khu vực hiển thị Link và Nút Copy */
         .copy-area { display: flex; gap: 8px; align-items: center; background: white; padding: 5px; border-radius: 10px; border: 1px solid #ddd; }
         #short-link-url { flex: 1; padding: 10px; border: none; font-size: 14px; color: #333; background: transparent; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         
-        /* Nút Copy chuyên nghiệp - Tối ưu cho Mobile */
-        .btn-copy { display: flex; align-items: center; gap: 6px; padding: 12px 18px; background: #2ecc71; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s; -webkit-user-select: none; user-select: none; }
-        /* Hiệu ứng phản hồi ngay lập tức khi chạm trên điện thoại */
-        .btn-copy:active { transform: scale(0.95); background-color: #27ae60; }
+        .btn-copy { display: flex; align-items: center; gap: 6px; padding: 12px 18px; background: #2ecc71; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; }
         
-        /* --- HẾT PHẦN KẾT QUẢ --- */
-        
-        /* Thông báo lỗi */
-        #error-msg { color: #ff4d4d; margin-top: 15px; font-size: 13px; font-weight: bold; display: none; padding: 10px; background: #fff1f0; border-radius: 8px; animation: fadeIn 0.3s; }
-        
-        /* Footer (Liên hệ Thùy Linh) */
+        /* Đoạn văn bản hướng dẫn Facebook */
+        .guide-text { margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(46, 204, 113, 0.2); font-size: 13px; color: #444; line-height: 1.5; }
+        .guide-text b { color: #2ecc71; }
+
+        #error-msg { color: #ff4d4d; margin-top: 15px; font-size: 13px; font-weight: bold; display: none; padding: 10px; background: #fff1f0; border-radius: 8px; }
         .footer { margin-top: 30px; font-size: 13px; color: #888; border-top: 1px solid #eee; padding-top: 20px; }
         .footer a { color: #1877f2; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; }
-        .footer a:active { opacity: 0.7; }
 
-        /* --- PHẦN THÔNG BÁO NỔI (TOAST MOBILE) MỚI --- */
-        #toast { visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center; border-radius: 50px; padding: 12px 20px; position: fixed; z-index: 100; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 14px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        #toast { visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center; border-radius: 50px; padding: 12px 20px; position: fixed; z-index: 100; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 14px; font-weight: bold; }
         #toast.show { visibility: visible; animation: fadeinToast 0.5s, fadeoutToast 0.5s 1.5s; }
 
-        /* Animations */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeinToast { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
         @keyframes fadeoutToast { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
@@ -88,6 +75,10 @@
                 <i class="far fa-copy"></i> COPY
             </button>
         </div>
+
+        <div class="guide-text">
+            <i class="fas fa-info-circle"></i> <b>Hướng dẫn:</b> Sau khi bấm <b>COPY</b>, bạn hãy quay lại Facebook, nhấn giữ vào ô bình luận rồi chọn <b>DÁN</b> để gửi cho khách nhé!
+        </div>
     </div>
 
     <div id="error-msg"></div>
@@ -103,7 +94,6 @@
 <div id="toast">✅ Đã COPY link mua hàng!</div>
 
 <script>
-    // Hàm hiển thị thông báo nổi (Toast)
     function showToast(message) {
         var toast = document.getElementById("toast");
         toast.textContent = message;
@@ -111,19 +101,18 @@
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2000);
     }
 
-    // Hàm dán link (Tự động lấy từ bộ nhớ tạm)
+    // Hàm dán link đã được sửa lỗi cho Mobile
     async function pasteLink() {
         try {
-            // navigator.clipboard.readText() là cách mới để đọc bộ nhớ tạm
             const text = await navigator.clipboard.readText();
             if(!text) { showToast("⚠️ Bộ nhớ tạm của bạn đang trống."); return; }
             document.getElementById('url-input').value = text;
         } catch (err) {
-            alert("Vui lòng cho phép quyền dán nếu trình duyệt hỏi. Hoặc bạn có thể giữ tay để dán link.");
+            // Hiển thị thông báo hướng dẫn khi trình duyệt chặn quyền dán
+            alert("Trình duyệt chặn quyền tự động dán để bảo mật. Bạn hãy NHẤN GIỮ vào ô nhập rồi chọn 'DÁN' nhé!");
         }
     }
 
-    // Hàm gọi API của chúng ta (File app.py)
     function handleConvert() {
         var rawUrl = document.getElementById('url-input').value;
         if(!rawUrl) { showToast("⚠️ Vui lòng dán link đã!"); return; }
@@ -131,7 +120,6 @@
         var btn = document.getElementById('btn-convert');
         var resultDiv = document.getElementById('result-section');
         var errorMsg = document.getElementById('error-msg');
-        var copyBtn = document.querySelector('.btn-copy');
         
         btn.textContent = 'ĐANG XỬ LÝ...';
         btn.disabled = true;
@@ -139,11 +127,6 @@
         errorMsg.style.display = "none";
         resultDiv.style.display = "none";
 
-        // Reset nút COPY về trạng thái ban đầu
-        copyBtn.innerHTML = '<i class="far fa-copy"></i> COPY';
-        copyBtn.style.background = "#2ecc71";
-
-        // Sử dụng Fetch API (Không cần cài jQuery)
         fetch('/convert?url=' + encodeURIComponent(rawUrl))
         .then(response => response.json())
         .then(data => {
@@ -153,7 +136,6 @@
             
             if(data.short_link) {
                 document.getElementById('short-link-url').value = data.short_link;
-                // Hiển thị khung màu xanh
                 resultDiv.style.display = "block";
             } else {
                 errorMsg.textContent = "Lỗi: " + data.error;
@@ -169,32 +151,23 @@
         });
     }
 
-    // Đăng ký sự kiện Click cho nút chuyển đổi
     document.getElementById('btn-convert').addEventListener('click', handleConvert);
 
-    // Hàm copy link (Lưu link vào bộ nhớ tạm)
     function copyLink() {
         var copyText = document.getElementById("short-link-url");
         var copyBtn = document.querySelector('.btn-copy');
-
-        // Copy vào bộ nhớ tạm
         navigator.clipboard.writeText(copyText.value);
+        showToast("✅ Đã COPY link! Giờ hãy quay lại Facebook để DÁN.");
         
-        // 1. Hiển thị Toast (Thông báo nổi) - Quan trọng nhất trên Mobile
-        showToast("✅ Đã COPY link mua hàng!");
-        
-        // 2. Rung nhẹ (chỉ Android)
         if (navigator.vibrate) { navigator.vibrate(50); }
         
-        // 3. Hiệu ứng đổi chữ tạm thời trên nút (như cũ nhưng nhanh hơn)
         copyBtn.innerHTML = '<i class="fas fa-check"></i> Xong!';
-        copyBtn.style.background = "#27ae60"; // Màu xanh đậm hơn
+        copyBtn.style.background = "#27ae60";
         
-        // Trả về chữ COPY sau 1 giây
         setTimeout(function() {
             copyBtn.innerHTML = '<i class="far fa-copy"></i> COPY';
             copyBtn.style.background = "#2ecc71";
-        }, 1000);
+        }, 1500);
     }
 </script>
 
