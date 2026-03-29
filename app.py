@@ -12,7 +12,6 @@ APP_ID = "17336120000"
 APP_SECRET = "J4FFDFKVLDORHOXUE4UY3XMQRE6OMDWE"
 
 def get_original_url(url):
-    """Xử lý các link rút gọn của Shopee để lấy link gốc trước khi convert"""
     try:
         if "s.shopee.vn" in url or "shope.ee" in url or "shopee.vn" in url:
             headers = {'User-Agent': 'Mozilla/5.0'}
@@ -20,34 +19,29 @@ def get_original_url(url):
             return response.url
         return url
     except Exception as e:
-        print(f"Lỗi lấy link gốc: {e}")
         return url
 
 def generate_shopee_link(origin_url):
     try:
         timestamp = int(time.time())
         endpoint = "https://open-api.affiliate.shopee.vn/graphql"
-        
         real_url = get_original_url(origin_url)
         
-        # ĐOẠN NÀY ĐÃ ĐƯỢC SỬA LỖI KHAI BÁO BIẾN
+        # CẤU TRÚC QUERY ĐƠN GIẢN HÓA (TRUYỀN TRỰC TIẾP GIÁ TRỊ)
+        # Cách này giúp tránh lỗi khai báo biến Mutation
         query = """
-        mutation($url: String!, $subid: String) {
-            generateShortLink(input: {originUrl: $url, externalTransactionId: $subid}) {
+        mutation {
+            generateShortLink(input: {
+                originUrl: "%s", 
+                externalTransactionId: "toolaff"
+            }) {
                 shortLink
             }
         }
-        """
+        """ % real_url
+
+        body = json.dumps({'query': query})
         
-        # Truyền giá trị toolaff vào đây
-        variables = {
-            "url": real_url,
-            "subid": "toolaff" 
-        }
-        
-        body = json.dumps({'query': query, 'variables': variables})
-        
-        # Tạo chữ ký bảo mật SHA256
         base_str = APP_ID + str(timestamp) + body + APP_SECRET
         signature = hashlib.sha256(base_str.encode('utf-8')).hexdigest()
 
@@ -59,7 +53,6 @@ def generate_shopee_link(origin_url):
         response = requests.post(endpoint, headers=headers, data=body, timeout=15)
         res_data = response.json()
         
-        # In ra log để bạn kiểm tra trên Render nếu vẫn lỗi
         print(f"Shopee Response: {res_data}")
         
         if 'data' in res_data and res_data['data'] and res_data['data'].get('generateShortLink'):
@@ -83,7 +76,8 @@ def convert():
     if final_link:
         return jsonify({"short_link": final_link})
     else:
-        return jsonify({"error": "Không thể chuyển đổi link này. Hãy kiểm tra lại link Shopee của bạn."})
+        # Nếu lỗi, trả về cả thông báo lỗi chi tiết để mình dễ sửa
+        return jsonify({"error": "API Shopee từ chối link. Hãy thử lại sau ít phút."})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
