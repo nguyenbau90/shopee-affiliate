@@ -15,7 +15,6 @@ def get_original_url(url):
     """Xử lý các link rút gọn của Shopee để lấy link gốc trước khi convert"""
     try:
         if "s.shopee.vn" in url or "shope.ee" in url or "shopee.vn" in url:
-            # Sử dụng headers để giả lập trình duyệt, tránh bị Shopee chặn
             headers = {'User-Agent': 'Mozilla/5.0'}
             response = requests.head(url, allow_redirects=True, timeout=10, headers=headers)
             return response.url
@@ -31,17 +30,16 @@ def generate_shopee_link(origin_url):
         
         real_url = get_original_url(origin_url)
         
-        # Cấu hình Query chuẩn theo Shopee Affiliate
-        # externalTransactionId chính là nơi chứa subID để theo dõi đơn hàng
+        # ĐOẠN NÀY ĐÃ ĐƯỢC SỬA LỖI KHAI BÁO BIẾN
         query = """
-        mutation($url: String!, $subid: String!) {
+        mutation($url: String!, $subid: String) {
             generateShortLink(input: {originUrl: $url, externalTransactionId: $subid}) {
                 shortLink
             }
         }
         """
         
-        # Đã sửa subID thành toolaff theo ý bạn
+        # Truyền giá trị toolaff vào đây
         variables = {
             "url": real_url,
             "subid": "toolaff" 
@@ -61,7 +59,7 @@ def generate_shopee_link(origin_url):
         response = requests.post(endpoint, headers=headers, data=body, timeout=15)
         res_data = response.json()
         
-        # Log kết quả để kiểm tra trong phần Logs của Render
+        # In ra log để bạn kiểm tra trên Render nếu vẫn lỗi
         print(f"Shopee Response: {res_data}")
         
         if 'data' in res_data and res_data['data'] and res_data['data'].get('generateShortLink'):
@@ -88,6 +86,5 @@ def convert():
         return jsonify({"error": "Không thể chuyển đổi link này. Hãy kiểm tra lại link Shopee của bạn."})
 
 if __name__ == '__main__':
-    # Cấu hình quan trọng để chạy được trên Render
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
