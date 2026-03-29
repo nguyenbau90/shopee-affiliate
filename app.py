@@ -31,15 +31,22 @@ def generate_shopee_link(origin_url):
         
         real_url = get_original_url(origin_url)
         
-        # Cấu hình Query chuẩn theo tài liệu Shopee Affiliate
+        # Cấu hình Query chuẩn theo Shopee Affiliate
+        # externalTransactionId chính là nơi chứa subID để theo dõi đơn hàng
         query = """
-        mutation($url: String!) {
-            generateShortLink(input: {originUrl: $url}) {
+        mutation($url: String!, $subid: String!) {
+            generateShortLink(input: {originUrl: $url, externalTransactionId: $subid}) {
                 shortLink
             }
         }
         """
-        variables = {"url": real_url}
+        
+        # Đã sửa subID thành toolaff theo ý bạn
+        variables = {
+            "url": real_url,
+            "subid": "toolaff" 
+        }
+        
         body = json.dumps({'query': query, 'variables': variables})
         
         # Tạo chữ ký bảo mật SHA256
