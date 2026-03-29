@@ -39,7 +39,9 @@
         
         /* Đoạn văn bản hướng dẫn Facebook */
         .guide-text { margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(46, 204, 113, 0.2); font-size: 13px; color: #444; line-height: 1.5; }
-        .guide-text b { color: #2ecc71; }
+        
+        /* Link group xanh đậm và có gạch chân */
+        .group-link { color: #1877f2; text-decoration: underline; font-weight: bold; }
 
         #error-msg { color: #ff4d4d; margin-top: 15px; font-size: 13px; font-weight: bold; display: none; padding: 10px; background: #fff1f0; border-radius: 8px; }
         .footer { margin-top: 30px; font-size: 13px; color: #888; border-top: 1px solid #eee; padding-top: 20px; }
@@ -77,14 +79,14 @@
         </div>
 
         <div class="guide-text">
-            <i class="fas fa-info-circle"></i> <b>Hướng dẫn:</b> Sau khi bấm <b>COPY</b>, bạn hãy quay lại Facebook, nhấn giữ vào ô bình luận rồi chọn <b>DÁN</b> để gửi cho khách nhé!
+            <i class="fas fa-info-circle"></i> <b>Hướng dẫn:</b> Copy link đã chuyển đổi -> bình luận vào bài viết trong group <a href="https://www.facebook.com/dmcnteam" target="_blank" class="group-link">ĐAM MÊ CÔNG NGHỆ</a> và bấm vào link đã bình luận để nhận mã giảm giá.
         </div>
     </div>
 
     <div id="error-msg"></div>
 
     <div class="footer">
-        Hỗ trợ kỹ thuật: 
+        Hỗ trợ săn SALE: 
         <a href="https://www.facebook.com/thuylinh.nguyen.6789/" target="_blank">
             <i class="fab fa-facebook-f"></i> Thùy Linh
         </a>
@@ -101,14 +103,12 @@
         setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2000);
     }
 
-    // Hàm dán link đã được sửa lỗi cho Mobile
     async function pasteLink() {
         try {
             const text = await navigator.clipboard.readText();
             if(!text) { showToast("⚠️ Bộ nhớ tạm của bạn đang trống."); return; }
             document.getElementById('url-input').value = text;
         } catch (err) {
-            // Hiển thị thông báo hướng dẫn khi trình duyệt chặn quyền dán
             alert("Trình duyệt chặn quyền tự động dán để bảo mật. Bạn hãy NHẤN GIỮ vào ô nhập rồi chọn 'DÁN' nhé!");
         }
     }
@@ -157,7 +157,7 @@
         var copyText = document.getElementById("short-link-url");
         var copyBtn = document.querySelector('.btn-copy');
         navigator.clipboard.writeText(copyText.value);
-        showToast("✅ Đã COPY link! Giờ hãy quay lại Facebook để DÁN.");
+        showToast("✅ Đã COPY link! Giờ hãy quay lại Group để DÁN.");
         
         if (navigator.vibrate) { navigator.vibrate(50); }
         
